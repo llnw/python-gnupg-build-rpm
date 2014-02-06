@@ -1,29 +1,24 @@
 Name:           python-gnupg
-Version:        0.3.5
-Release:        4%{?dist}
+Version:        0.3.6
+Release:        1%{?dist}
 Summary:        Python module for GnuPG
 Group:          Development/Languages
 License:        BSD
 URL:            http://pythonhosted.org/python-gnupg/
-Source0:        http://python-gnupg.googlecode.com/files/%{name}-%{version}.tar.gz
+Source0:        https://pypi.python.org/packages/source/p/%{name}/%{name}-%{version}.tar.gz
+
 BuildArch:      noarch
 BuildRequires:  python2-devel
 Requires:       gnupg
-# Patch required for raw (non-ascii) key exports - required for hash-slinger's use
-# submitted to upstream: http://code.google.com/p/python-gnupg/issues/detail?id=94
-Patch1:         python-gnupg-0.3.5-export.patch
 
 %description
 GnuPG bindings for python. This uses the gpg command.
 
 %prep
 %setup -q
-%patch1 -p1
 
 %build
 %{__python2} setup.py build
-mv README README.org
-tr -d '\r' < README.org > README
 
 %install
 %{__python2} setup.py install -O1 --skip-build --root %{buildroot}
@@ -34,6 +29,11 @@ tr -d '\r' < README.org > README
 %{python_sitelib}/python_gnupg-%{version}-py*.egg-info
 
 %changelog
+* Thu Feb 06 2014 Paul Wouters <pwouters@redhat.com> - 0.3.6-1
+- Updated to 0.3.6 which includes Security fix (CVE-2014-XXXX)
+- Upstream including our export patch and converted README file
+- Upstream switched to new download site
+
 * Mon Jan 06 2014 Paul Wouters <pwouters@redhat.com> - 0.3.5-4
 - Require gnupg (duh)
 - Remove cleaning in install target
