@@ -1,12 +1,11 @@
 Name:           python-gnupg
 Version:        0.3.6
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Python module for GnuPG
 Group:          Development/Languages
 License:        BSD
 URL:            http://pythonhosted.org/python-gnupg/
 Source0:        https://pypi.python.org/packages/source/p/%{name}/%{name}-%{version}.tar.gz
-Patch1:         python-gnupg-0.3.6-encoding.patch
 
 BuildArch:      noarch
 BuildRequires:  python2-devel
@@ -17,7 +16,6 @@ GnuPG bindings for python. This uses the gpg command.
 
 %prep
 %setup -q
-%patch1 -p1
 
 %build
 %{__python2} setup.py build
@@ -31,6 +29,9 @@ GnuPG bindings for python. This uses the gpg command.
 %{python_sitelib}/python_gnupg-%{version}-py*.egg-info
 
 %changelog
+* Thu Apr 17 2014 Paul Wouters <pwouters@redhat.com> - 0.3.6-3
+- Removed patch as gpg.decode_errors=ignore works well
+
 * Thu Apr 17 2014 Paul Wouters <pwouters@redhat.com> - 0.3.6-2
 - Re-instate part of export patch that fixed encoding bug
 
