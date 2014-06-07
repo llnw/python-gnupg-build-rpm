@@ -1,6 +1,6 @@
 Name:           python-gnupg
 Version:        0.3.6
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Python module for GnuPG
 Group:          Development/Languages
 License:        BSD
@@ -29,6 +29,9 @@ GnuPG bindings for python. This uses the gpg command.
 %{python_sitelib}/python_gnupg-%{version}-py*.egg-info
 
 %changelog
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3.6-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
 * Thu Apr 17 2014 Paul Wouters <pwouters@redhat.com> - 0.3.6-3
 - Removed patch as gpg.decode_errors=ignore works well
 
