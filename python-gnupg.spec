@@ -1,6 +1,6 @@
 Name:           python-gnupg
-Version:        0.3.6
-Release:        4%{?dist}
+Version:        0.3.7
+Release:        1%{?dist}
 Summary:        Python module for GnuPG
 Group:          Development/Languages
 License:        BSD
@@ -24,11 +24,14 @@ GnuPG bindings for python. This uses the gpg command.
 %{__python2} setup.py install -O1 --skip-build --root %{buildroot}
 
 %files
-%doc PKG-INFO LICENSE README
+%doc PKG-INFO LICENSE.txt README.rst
 %{python_sitelib}/gnupg*.py*
 %{python_sitelib}/python_gnupg-%{version}-py*.egg-info
 
 %changelog
+* Tue Jan 06 2015 Paul Wouters <pwouters@redhat.com> - 0.3.7-1
+- Updated to 0.3.7 Merged in export-minimal and armor options, many encoding fixes
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3.6-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
