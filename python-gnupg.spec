@@ -1,34 +1,50 @@
-Name:           python-gnupg
+%global __os_install_post %{__python26_os_install_post}
+%global __python2 /usr/bin/python2.6
+
+%{!?python_sitelib: %define python_sitelib %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
+
+%global oname python-gnupg
+
+Name:           python26-gnupg
 Version:        0.3.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python module for GnuPG
 Group:          Development/Languages
 License:        BSD
 URL:            http://pythonhosted.org/python-gnupg/
-Source0:        https://pypi.python.org/packages/source/p/%{name}/%{name}-%{version}.tar.gz
+Source0:        https://pypi.python.org/packages/source/p/%{oname}/%{oname}-%{version}.tar.gz
 
 BuildArch:      noarch
-BuildRequires:  python2-devel
+BuildRequires:  python26-devel
 Requires:       gnupg
+BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 GnuPG bindings for python. This uses the gpg command.
 
 %prep
-%setup -q
+%setup -q -n %{oname}-%{version}
 
 %build
 %{__python2} setup.py build
 
 %install
+%{__rm} -rf %{buildroot}
 %{__python2} setup.py install -O1 --skip-build --root %{buildroot}
 
+%clean
+%{__rm} -rf %{buildroot}
+
 %files
+%defattr(-, root, root, -)
 %doc PKG-INFO LICENSE.txt README.rst
 %{python_sitelib}/gnupg*.py*
 %{python_sitelib}/python_gnupg-%{version}-py*.egg-info
 
 %changelog
+* Fri Jan 09 2015 Kevin Bowling <kbowling@llnw.com> - 0.3.7-2
+- Package for EPEL5
+
 * Tue Jan 06 2015 Paul Wouters <pwouters@redhat.com> - 0.3.7-1
 - Updated to 0.3.7 Merged in export-minimal and armor options, many encoding fixes
 
